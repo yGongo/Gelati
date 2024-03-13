@@ -42,7 +42,11 @@ namespace eugenio.malenchi._4i.gelati
             while (!lettoreIngredienti.EndOfStream)
             {
                 string rigaIngredienti = lettoreIngredienti.ReadLine();
-
+                if (rigaIngredienti.Split(';').Length == 3)
+                {
+                    //usando il costruttore di Gelato che accetta una stringa creo e aggiungo un nuovo Ingrediente alla lista elencoGelati
+                    elencoIngredienti.Add(new Ingrediente(rigaIngredienti));
+                }
             }
             dg.ItemsSource = elencoGelati;
         }
@@ -53,9 +57,21 @@ namespace eugenio.malenchi._4i.gelati
 
         private void dg_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var p = e.AddedItems as Gelato;
+            var p = e.AddedItems[0] as Gelato;
             int pk = p.IdGelato;
-            
+            List<Ingrediente> elencoListaIngredienti = new List<Ingrediente>();
+            foreach (Ingrediente ingrediente in elencoIngredienti)
+            {
+                try
+                {
+                    if (ingrediente.IdGelato == pk)
+                    {
+                        elencoListaIngredienti.Add(ingrediente);
+                    }
+                }
+                catch { }
+            }
+            dg1.ItemsSource = elencoListaIngredienti;
         }
     }
 }

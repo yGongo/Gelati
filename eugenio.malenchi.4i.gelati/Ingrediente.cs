@@ -1,4 +1,6 @@
-﻿namespace eugenio.malenchi._4i.gelati
+﻿using System;
+
+namespace eugenio.malenchi._4i.gelati
 {
     internal class Ingrediente
     {
@@ -24,6 +26,14 @@
             this.idGelato = idGelato;
             this.tipo = tipo;
             this.valore = valore;
+        }
+
+        public Ingrediente(string s)
+        {
+            string[] s1 = s.Split(';');
+            IdGelato = Convert.ToInt32(s1[0]);
+            Enum.TryParse(s1[1],out tipo);
+            valore = s1[2];
         }
 
         public int IdGelato

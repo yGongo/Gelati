@@ -17,7 +17,7 @@ namespace eugenio.malenchi._4i.gelati
                 Nome = s1[1];
                 Descrizione = s1[2];
                 Prezzo = s1[3];
-        }
+            }
 
 
         public int IdGelato { get => idGelato; set => idGelato = value; }
