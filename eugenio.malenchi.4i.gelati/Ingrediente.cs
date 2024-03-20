@@ -21,7 +21,6 @@ namespace eugenio.malenchi._4i.gelati
         private int idGelato;
         private string valore;
         private TipoIngrediente tipo;
-        private string altro; // Nuovo campo
 
         public Ingrediente(int idGelato, TipoIngrediente tipo, string valore)
         {
@@ -29,15 +28,6 @@ namespace eugenio.malenchi._4i.gelati
             this.tipo = tipo;
             this.valore = valore;
         }
-
-        public Ingrediente(int idGelato, TipoIngrediente tipo, string valore, string altro) // Costruttore aggiornato
-        {
-            this.idGelato = idGelato;
-            this.tipo = tipo;
-            this.valore = valore;
-            this.altro = altro;
-        }
-
         public Ingrediente() { }
 
         public Ingrediente(string s)
@@ -64,34 +54,55 @@ namespace eugenio.malenchi._4i.gelati
             get { return valore; }
         }
 
-        public string Altro // Proprietà per accedere al nuovo campo
-        {
-            get { return altro; }
-        }
+
 
         public static Ingrediente TrovaIngrediente(string s)
         {
             string[] s1 = s.Split(';');
             TipoIngrediente tipo;
             Enum.TryParse(s1[1], out tipo);
-            return new Ingrediente(Convert.ToInt32(s1[0]), tipo, s1[2], s1[3]); // Costruzione dell'ingrediente con il nuovo campo
+            if (TipoIngrediente.Panna == tipo)
+                return new IngredientePanna(s);
+            if (TipoIngrediente.Colorante == tipo)
+                return new IngrdienteColorante(s);
+            if (TipoIngrediente.Latte == tipo)
+                return new IngredienteLatte(s);
+            return new Ingrediente(s);
         }
     }
 
 
     public class IngredientePanna : Ingrediente
     {
-        public string Tipo { get; set; }
-        public int Quantita { get; set; }
+        public string Calorie { get; set; }
+        public IngredientePanna(string s) : base(s) 
+        {
+            string[] s1 = s.Split(';');
+            IdGelato = Convert.ToInt32(s1[0]);
+            Calorie = s1[3];
+        }
+
+    }
+    public class IngrdienteColorante : Ingrediente
+    {
+        public string Colore { get; set; }
+        public IngrdienteColorante(string s) : base(s)
+        {
+            string[] s1 = s.Split(';');
+            IdGelato = Convert.ToInt32(s1[0]);
+            Colore = s1[3];
+        }
+
     }
     public class IngredienteLatte : Ingrediente
     {
-        public string Tipo { get; set; }
-        public int Quantita { get; set; }
-    }
-    public class IngredienteColorante : Ingrediente
-    {
-        public string Tipo { get; set; }
-        public int Quantita { get; set; }
+        public string Lattosio { get; set; }
+        public IngredienteLatte(string s) : base(s)
+        {
+            string[] s1 = s.Split(';');
+            IdGelato = Convert.ToInt32(s1[0]);
+            Lattosio = s1[3];
+        }
+
     }
 }

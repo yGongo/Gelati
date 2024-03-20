@@ -21,7 +21,16 @@
             </DataGrid>
         </Grid>
         <Grid Grid.Row="0" Grid.Column="1">
-            <DataGrid x:Name="dg1" IsReadOnly="True"></DataGrid>
+            <DataGrid x:Name="dg1" IsReadOnly="True" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding IdGelato}" />
+                    <DataGridTextColumn Header="Tipo" Binding="{Binding Tipo}" />
+                    <DataGridTextColumn Header="Quantità" Binding="{Binding Valore}" />
+                    <DataGridTextColumn Header="Lattosio" Binding="{Binding Lattosio}" />
+                    <DataGridTextColumn Header="Calorie" Binding="{Binding Calorie}" />
+                    <DataGridTextColumn Header="Colore" Binding="{Binding Colore}" />
+                </DataGrid.Columns>
+            </DataGrid>
         </Grid>
     </Grid>
 </Window>

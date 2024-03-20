@@ -40,17 +40,8 @@ namespace eugenio.malenchi._4i.gelati
 
             //con un ciclo while scorro il file Ingredienti.csv
             while (!lettoreIngredienti.EndOfStream)
-            {
-                string rigaIngredienti = lettoreIngredienti.ReadLine();
-                if (rigaIngredienti.Split(';').Length == 4) // Controlliamo la lunghezza per comprendere se è presente il campo "altro"
-                {
-                    //usando il metodo TrovaIngrediente della classe Ingrediente creo e aggiungo un nuovo Ingrediente alla lista elencoIngredienti
-                    elencoIngredienti.Add(Ingrediente.TrovaIngrediente(rigaIngredienti));
-                }if(rigaIngredienti.Split(';').Length == 3)
-                {
-                    elencoIngredienti.Add(new Ingrediente(rigaIngredienti));
-                }
-            }
+                elencoIngredienti.Add(Ingrediente.TrovaIngrediente(lettoreIngredienti.ReadLine()));
+            
             dg.ItemsSource = elencoGelati;
         }
 
