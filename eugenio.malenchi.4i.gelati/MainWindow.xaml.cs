@@ -19,7 +19,7 @@ namespace eugenio.malenchi._4i.gelati
             elencoGelati = new List<Gelato>();
             elencoIngredienti = new List<Ingrediente>();
 
-            //creo il lettore di Gelati
+            //creo il lettore di Gelati   
             StreamReader lettoreGelati = new StreamReader("Gelati.csv");
             lettoreGelati.ReadLine();
 
@@ -42,9 +42,12 @@ namespace eugenio.malenchi._4i.gelati
             while (!lettoreIngredienti.EndOfStream)
             {
                 string rigaIngredienti = lettoreIngredienti.ReadLine();
-                if (rigaIngredienti.Split(';').Length == 3)
+                if (rigaIngredienti.Split(';').Length == 4) // Controlliamo la lunghezza per comprendere se è presente il campo "altro"
                 {
-                    //usando il costruttore di Gelato che accetta una stringa creo e aggiungo un nuovo Ingrediente alla lista elencoGelati
+                    //usando il metodo TrovaIngrediente della classe Ingrediente creo e aggiungo un nuovo Ingrediente alla lista elencoIngredienti
+                    elencoIngredienti.Add(Ingrediente.TrovaIngrediente(rigaIngredienti));
+                }if(rigaIngredienti.Split(';').Length == 3)
+                {
                     elencoIngredienti.Add(new Ingrediente(rigaIngredienti));
                 }
             }
